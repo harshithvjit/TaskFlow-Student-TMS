@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow | Student Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">✓</div>
+                <div>
+                    <h2>TaskFlow</h2>
+                    <span>Student Manager</span>
+                </div>
+            </div>
+
+            <nav>
+                <a href="#" class="nav-item active">
+                    <span>▦</span> Dashboard
+                </a>
+                <a href="#tasks" class="nav-item">
+                    <span>✓</span> My Tasks
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <p>Stay organized.</p>
+                <p>Stay productive.</p>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <div>
+                    <p class="welcome">Welcome back 👋</p>
+                    <h1>Student Dashboard</h1>
+                </div>
+
+                <button class="add-btn" onclick="openTaskModal()">
+                    + Add Task
+                </button>
+            </header>
+
+            <!-- Statistics -->
+            <section class="stats">
+
+                <div class="stat-card">
+                    <div class="stat-icon total">📋</div>
+                    <div>
+                        <span>Total Tasks</span>
+                        <strong id="totalTasks">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon pending">⏳</div>
+                    <div>
+                        <span>Pending</span>
+                        <strong id="pendingTasks">0</strong>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon completed">✓</div>
+                    <div>
+                        <span>Completed</span>
+                        <strong id="completedTasks">0</strong>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Tasks -->
+            <section class="tasks-section" id="tasks">
+
+                <div class="section-header">
+                    <div>
+                        <h2>My Tasks</h2>
+                        <p>Manage your academic and personal tasks.</p>
+                    </div>
+
+                    <div class="filters">
+                        <button class="filter active" onclick="filterTasks('all', this)">
+                            All
+                        </button>
+                        <button class="filter" onclick="filterTasks('pending', this)">
+                            Pending
+                        </button>
+                        <button class="filter" onclick="filterTasks('completed', this)">
+                            Completed
+                        </button>
+                    </div>
+                </div>
+
+                <div class="search-box">
+                    <span>🔍</span>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search tasks..."
+                        oninput="renderTasks()"
+                    >
+                </div>
+
+                <div id="taskList" class="task-list"></div>
+
+                <div id="emptyState" class="empty-state">
+                    <div>📝</div>
+                    <h3>No tasks found</h3>
+                    <p>Add a task to get started.</p>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Modal -->
+    <div id="taskModal" class="modal">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <div>
+                    <h2 id="modalTitle">Add New Task</h2>
+                    <p>Create a task and stay organized.</p>
+                </div>
+
+                <button class="close-btn" onclick="closeTaskModal()">×</button>
+            </div>
+
+            <form id="taskForm">
+
+                <input type="hidden" id="taskId">
+
+                <label for="taskTitle">Task Title</label>
+                <input
+                    type="text"
+                    id="taskTitle"
+                    placeholder="e.g. Complete DevOps assignment"
+                    required
+                >
+
+                <label for="taskDescription">Description</label>
+                <textarea
+                    id="taskDescription"
+                    placeholder="Add task details..."
+                    rows="3"
+                ></textarea>
+
+                <label for="taskDate">Due Date</label>
+                <input type="date" id="taskDate">
+
+                <label for="taskCategory">Category</label>
+                <select id="taskCategory">
+                    <option value="Academic">Academic</option>
+                    <option value="Personal">Personal</option>
+                    <option value="Project">Project</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <div class="modal-actions">
+                    <button type="button" class="cancel-btn" onclick="closeTaskModal()">
+                        Cancel
+                    </button>
+
+                    <button type="submit" class="save-btn">
+                        Save Task
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
